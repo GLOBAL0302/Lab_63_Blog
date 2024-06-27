@@ -1,12 +1,15 @@
-import { useState } from 'react'
-
 import './App.css'
+import NavBar from './components/NavBar/NavBar.tsx';
+import HomePage from "./Pages/HomePage/HomePage.tsx"
+import PostFormPage from './Pages/PostFormPage/PostFormPage.tsx';
 
 const App = () => {
-  const [count, setCount] = useState(0)
 
   return (
     <>
+      <NavBar/>
+      <HomePage/>
+      <PostFormPage/>
     </>
   )
 };
