@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { userInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 
 
 const initialInputState = {
   title:"",
-  description:''
+  description:"",
+  dateTime:""
+}
+
+const getDate = ()=>{
+  const today = new Date();
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  return date + ' ' + time
 }
 
 const PostForm = () => {
@@ -17,6 +25,7 @@ const PostForm = () => {
     const {name, value} = event.target
     setUserInput((prevState)=>({
       ...prevState,
+      dateTime:getDate(),
       [name]:value
     }))
   }
@@ -29,6 +38,7 @@ const PostForm = () => {
       setUserInput(initialInputState)
     }
   }
+
 
 
   return (

@@ -1,4 +1,5 @@
 export interface userInput{
   title:string,
-  description:string
+  description:string,
+  dateTime:string
 }

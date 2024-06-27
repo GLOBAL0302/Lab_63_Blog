@@ -1,21 +1,27 @@
+import {NavLink } from 'react-router-dom';
+
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand " href="#">My Blog</a>
+        <NavLink to="/" className="navbar-brand">My Blog</NavLink>
         <div className="collapse navbar-collapse d-flex" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link " aria-current="page" href="#">Home</a>
+              <NavLink
+                to="/"
+                className="nav-link" aria-current="page">Home</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link " aria-current="page" href="#">Add</a>
+              <NavLink
+                to="addPost"
+                className="nav-link " aria-current="page" href="#">Add</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link " aria-current="page" href="#">About</a>
+              <NavLink to="/About" className="nav-link " aria-current="page">About</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link " aria-current="page" href="#">Contacts</a>
+              <NavLink to="/Contacts" className="nav-link " aria-current="page" href="#">Contacts</NavLink>
             </li>
           </ul>
         </div>
