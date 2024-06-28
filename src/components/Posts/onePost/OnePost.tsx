@@ -23,7 +23,7 @@ const OnePost: React.FC<Props> = ({ post }) => {
           <p className='card-text'>{onePost.description}</p>
         </div>
         <div className="d-flex gap-2">
-          <button className="ms-auto btn btn-success col-1 fs-5">Edit</button>
+          <NavLink to={`/posts/${id}/edit`} className="ms-auto btn btn-success col-1 fs-5">Edit</NavLink>
           <button className="btn btn-danger col-1 fs-5">Delete</button>
         </div>
       </div>);
