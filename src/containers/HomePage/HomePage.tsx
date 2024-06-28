@@ -16,7 +16,6 @@ const HomePage = () => {
         ...response.data[id],
         id,
       }))
-
       setPost(posts)
     }
 
@@ -24,7 +23,7 @@ const HomePage = () => {
 
   useEffect(() => {
     void fetchAllPostData()
-  }, []);
+  }, [fetchAllPostData]);
 
   return (
     <div className="mt-5">

@@ -1,5 +1,5 @@
 import { Post, UserInput } from '../../../types.ts';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../../axiosApi.ts';
 
@@ -10,6 +10,12 @@ interface Props {
 const OnePost: React.FC<Props> = ({ post }) => {
   const [onePost, setOnePost] = useState<UserInput>();
   const { id } = useParams();
+  const navigate = useNavigate()
+
+  const deleteOnePost = async ()=>{
+    axiosApi.delete(`/posts/${id}`)
+    navigate("/")
+  }
 
   let showOnePost;
   if (onePost) {
@@ -24,7 +30,9 @@ const OnePost: React.FC<Props> = ({ post }) => {
         </div>
         <div className="d-flex gap-2">
           <NavLink to={`/posts/${id}/edit`} className="ms-auto btn btn-success col-1 fs-5">Edit</NavLink>
-          <button className="btn btn-danger col-1 fs-5">Delete</button>
+          <button
+            onClick={deleteOnePost}
+            className="btn btn-danger col-1 fs-5">Delete</button>
         </div>
       </div>);
   } else {

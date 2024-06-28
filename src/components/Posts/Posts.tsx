@@ -5,7 +5,8 @@ interface Props{
   posts:Post[]
 }
 const Posts:React.FC<Props> = ({posts}) => {
-  return (
+
+  return(
     <div>
       {posts.map((post)=>(
         <OnePost
@@ -13,7 +14,7 @@ const Posts:React.FC<Props> = ({posts}) => {
           post={post}/>
       ))}
     </div>
-  );
+  )
 };
 
 export default Posts;
