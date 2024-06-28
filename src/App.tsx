@@ -5,6 +5,7 @@ import PostFormPage from './containers/PostFormPage/PostFormPage.tsx';
 import { Route, Routes } from 'react-router-dom';
 import Contacts from './containers/Contacts/Contacts.tsx';
 import About from './containers/About/About.tsx';
+import OnePost from './components/Posts/onePost/OnePost.tsx';
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
         <Route path="/AddPost" element={<PostFormPage/>}/>
         <Route path={"/About"} element={<About/>}/>
         <Route path={"/Contacts"} element={<Contacts/>}/>
+        {/*<Route path="/posts/:id" element={<OnePost/>}/>*/}
+        <Route path="*" element={<h2>Sorry current page does not exist</h2>}/>
       </Routes>
     </>
   )

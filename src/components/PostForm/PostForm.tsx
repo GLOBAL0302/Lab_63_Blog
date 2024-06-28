@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { userInput } from '../../types.ts';
+import { UserInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
+import { useNavigate } from 'react-router-dom';
 
 
 const initialInputState = {
@@ -17,25 +18,33 @@ const getDate = ()=>{
 }
 
 const PostForm = () => {
-  const [userInput, setUserInput] = useState<userInput>(
+  const [userInput, setUserInput] = useState<UserInput>(
     initialInputState
   )
 
+  const navigate = useNavigate()
   const onChangeInput = (event:React.ChangeEvent<HTMLInputElement>)=>{
     const {name, value} = event.target
     setUserInput((prevState)=>({
       ...prevState,
-      dateTime:getDate(),
       [name]:value
     }))
   }
 
   const formSubmit = (event:React.FormEvent)=>{
-    event.preventDefault()
+    event.preventDefault();
+    const toPost = {
+      ...userInput,
+      dateTime: getDate()
+    }
     try {
-      axiosApi.post("/posts.json", userInput)
-    }finally {
+      axiosApi.post("/posts.json", toPost)
+    }catch (e){
+      throw e
+    }
+    finally {
       setUserInput(initialInputState)
+      navigate("/")
     }
   }
 
@@ -52,6 +61,7 @@ const PostForm = () => {
             <label htmlFor='title'><strong className="fs-3">Title:</strong></label>
             <br/>
             <input
+              required
               onChange={onChangeInput}
               value={userInput.title}
               id="title"
@@ -63,6 +73,7 @@ const PostForm = () => {
             <label htmlFor='description'><strong className="fs-3">Description:</strong></label>
             <br/>
             <input
+              required
               value={userInput.description}
               onChange={onChangeInput}
               id="description"
