@@ -2,7 +2,7 @@ import {NavLink } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
       <div className="container-fluid">
         <NavLink to="/" className="navbar-brand">My Blog</NavLink>
         <div className="collapse navbar-collapse d-flex" id="navbarNav">

@@ -1,42 +1,62 @@
-
-import { Post } from '../../../types.ts';
+import { Post, UserInput } from '../../../types.ts';
 import { NavLink, useParams } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../../axiosApi.ts';
 
-interface Props{
-  post:Post
+interface Props {
+  post: Post;
 }
-const OnePost:React.FC<Props> = ({post}) => {
-  const {id} = useParams()
-  let showOnePost = (<div>Hello</div>)
 
-  const fetchPostData = useCallback(async ()=>{
-    if (id){
-      const {data} = await axiosApi.get(`/posts/${id}`)
-      console.log(data);
-      showOnePost = (<div>{data.dateTime}</div>)
+const OnePost: React.FC<Props> = ({ post }) => {
+  const [onePost, setOnePost] = useState<UserInput>();
+  const { id } = useParams();
+
+  let showOnePost;
+  if (onePost) {
+    showOnePost = (
+      <div className='card mb-3 p-3'>
+        <div className='card-header'>
+          <p>Created on: {onePost.dateTime}</p>
+        </div>
+        <div className='card-body'>
+          <p className='card-text fs-4'>{onePost.title}</p>
+          <p className='card-text'>{onePost.description}</p>
+        </div>
+        <div className="d-flex gap-2">
+          <button className="ms-auto btn btn-success col-1 fs-5">Edit</button>
+          <button className="btn btn-danger col-1 fs-5">Delete</button>
+        </div>
+      </div>);
+  } else {
+    let showOnePost = (<div>hello</div>);
+  }
+
+
+  const fetchPostData = useCallback(async () => {
+    if (id) {
+      const { data } = await axiosApi.get(`/posts/${id}`);
+      setOnePost(data);
     }
-  },[id])
+  }, [id]);
 
   useEffect(() => {
-    void fetchPostData()
+    void fetchPostData();
   }, [fetchPostData]);
 
-  return post? (
-   <>
-     <div className="card mb-3">
-       <div className="card-header">
-         <p>Created on: {post.dateTime}</p>
-       </div>
-       <div className="card-body">
-         <p className="card-text fs-4">{post.title}</p>
-         <NavLink to={`/posts/${post.id}.json`}
-           className="btn btn-primary">Read more</NavLink>
-       </div>
-     </div>
-   </>
-  ):showOnePost
+  return post ? (
+    <>
+      <div className='card mb-3 p-3'>
+        <div className='card-header'>
+          <p>Created on: {post.dateTime}</p>
+        </div>
+        <div className='card-body'>
+          <p className='card-text fs-4'>{post.title}</p>
+          <NavLink to={`/posts/${post.id}.json`}
+                   className='btn btn-primary'>Read more</NavLink>
+        </div>
+      </div>
+    </>
+  ) : showOnePost;
 };
 
 export default OnePost;
