@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/AddPost" element={<PostFormPage/>}/>
         <Route path={"/About"} element={<About/>}/>
         <Route path={"/Contacts"} element={<Contacts/>}/>
-        {/*<Route path="/posts/:id" element={<OnePost/>}/>*/}
+        <Route path="/posts/:id" element={<OnePost/>}/>
         <Route path="*" element={<h2>Sorry current page does not exist</h2>}/>
       </Routes>
     </>
