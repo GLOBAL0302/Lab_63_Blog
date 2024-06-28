@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../../axiosApi.ts';
 
 interface Props {
-  post: Post;
+  post?: Post;
 }
 
 const OnePost: React.FC<Props> = ({ post }) => {
@@ -41,10 +41,7 @@ const OnePost: React.FC<Props> = ({ post }) => {
         </div>
       </div>
     );
-  } else {
-    let showOnePost = <div>hello</div>;
   }
-
   const fetchPostData = useCallback(async () => {
     if (id) {
       const { data } = await axiosApi.get(`/posts/${id}`);

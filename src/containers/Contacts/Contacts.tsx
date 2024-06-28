@@ -7,6 +7,7 @@ const Contacts = () => {
         </h2>
         <div className="input-group flex-nowrap align-items-center">
           <img
+            alt="contact icon"
             src="https://cdn-icons-png.freepik.com/512/535/535239.png"
             style={{ width: '50px' }}
             className="input-group-text d-block"
@@ -22,6 +23,7 @@ const Contacts = () => {
         </div>
         <div className="input-group flex-nowrap align-items-center">
           <img
+            alt="contact icon"
             src="https://cdn-icons-png.freepik.com/256/15/15874.png?ga=GA1.1.5236191.1719216742&semt=ais_hybrid"
             style={{ width: '50px' }}
             className="input-group-text d-block"
@@ -37,6 +39,7 @@ const Contacts = () => {
         </div>
         <div className="input-group flex-nowrap align-items-center">
           <img
+            alt="contact icon"
             src="https://t3.ftcdn.net/jpg/01/81/00/34/240_F_181003490_CxW4fQ0H3VypIIsPkFGpMDviO8ysWjOZ.jpg"
             style={{ width: '50px' }}
             className="input-group-text d-block"
@@ -52,6 +55,7 @@ const Contacts = () => {
         </div>
         <div className="input-group flex-nowrap align-items-center">
           <img
+            alt="contact icon"
             src="https://cdn-icons-png.freepik.com/256/13689/13689399.png?ga=GA1.1.5236191.1719216742&semt=ais_hybrid"
             style={{ width: '50px' }}
             className="input-group-text d-block"

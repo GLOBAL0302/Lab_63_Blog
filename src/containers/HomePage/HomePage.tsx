@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../axiosApi.ts';
 import { ApiPosts, Post } from '../../types.ts';
