@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UserInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const initialInputState = {
@@ -17,10 +17,24 @@ const getDate = ()=>{
   return date + ' ' + time
 }
 
+
 const PostForm = () => {
   const [userInput, setUserInput] = useState<UserInput>(
     initialInputState
   )
+  const {id} = useParams()
+  const fetchPostData = useCallback(async ()=>{
+    if(id){
+      const {data} = await axiosApi.get<UserInput | null>(`/posts/${id}`)
+      setUserInput(data)
+    }
+  },[id])
+
+  useEffect(() => {
+    void fetchPostData()
+  }, [fetchPostData]);
+
+
 
   const navigate = useNavigate()
   const onChangeInput = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -38,7 +52,11 @@ const PostForm = () => {
       dateTime: getDate()
     }
     try {
-      axiosApi.post("/posts.json", toPost)
+      if(!id){
+        axiosApi.post("/posts.json", toPost)
+      }else{
+        axiosApi.put(`/posts/${id}`, userInput)
+      }
     }catch (e){
       throw e
     }
@@ -48,11 +66,9 @@ const PostForm = () => {
     }
   }
 
-
-
   return (
     <div className="border border-5 p-5">
-      <h1 className="mb-3 link-offset-3"><i>Add new Post</i></h1>
+      <h1 className="mb-3 link-offset-3"><i>{id?"Edit":"Add new Post"}</i></h1>
       <div className="form">
         <form
           onSubmit={formSubmit}
@@ -85,7 +101,7 @@ const PostForm = () => {
           <button
             type="submit"
             className="btn btn-success mt-5 col-3 fs-4">
-            Send Post
+            {id?"Save Change": "Send Post"}
           </button>
         </form>
       </div>
