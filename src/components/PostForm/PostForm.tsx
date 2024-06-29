@@ -20,6 +20,8 @@ const getDate = () => {
 
 const PostForm = () => {
   const [userInput, setUserInput] = useState<UserInput>(initialInputState);
+  const [isLoading, setIsLoading] = useState(false)
+
   const { id } = useParams();
   const fetchPostData = useCallback(async () => {
     if (id) {
@@ -42,6 +44,7 @@ const PostForm = () => {
   };
 
   const formSubmit = (event: React.FormEvent) => {
+    setIsLoading(true)
     event.preventDefault();
     const toPost = {
       ...userInput,
@@ -58,6 +61,7 @@ const PostForm = () => {
     } finally {
       setUserInput(initialInputState);
       navigate('/');
+      setIsLoading(false)
     }
   };
 
@@ -98,9 +102,11 @@ const PostForm = () => {
               className="col-6"
             />
           </div>
-          <button type="submit" className="btn btn-success mt-5 col-3 fs-4">
+          {isLoading?<div className="spinner-border mt-5" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div> :<button type="submit" className="btn btn-success mt-5 col-3 fs-4">
             {id ? 'Save Change' : 'Send Post'}
-          </button>
+          </button> }
         </form>
       </div>
     </div>
